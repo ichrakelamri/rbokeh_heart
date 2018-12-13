@@ -1,0 +1,46 @@
+---
+title: "rbokeh heart"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(rbokeh)
+library(readr)
+heart <- read_table2("heart.txt")
+str(heart)
+
+```
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+### Chart A
+
+```{r}
+figure(width = NULL, height = NULL) %>%
+  ly_points(pression ,depression, data = heart, color = coeur)
+
+```
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### Chart B
+
+```{r}
+figure(width = NULL, height = NULL, legend_location = "top_left") %>%
+  ly_quantile(pression, group = coeur, data = heart)
+
+```
+
+### Chart C
+
+```{r}
+figure(width = NULL, height = NULL) %>%
+  ly_points(pression, depression, data = heart,color =type_douleur)
+```
+
